@@ -60,8 +60,8 @@ Foreach ($i in $Domains)
         $AllComputers += $Computers
     }
 
-# Strip out the special character from Server 2008 objects...
-$AllComputers = $Allcomputers -replace "Server?","Server"
+# Strip out the special character from Server 2008 and Vista objects...
+$AllComputers = $Allcomputers -replace "\?",""
 
 # Write computer object data to CSV file...
 $AllComputers | Export-CSV $output -NoClobber -NoTypeInformation
