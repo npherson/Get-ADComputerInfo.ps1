@@ -55,7 +55,7 @@ $Domains = (Get-ADForest).Domains
 $AllComputers = @()
 Foreach ($i in $Domains)
     {
-        $Computers = Get-ADComputer -Filter {OperatingSystem -Like "*Windows*"} -Server $i -Properties lastlogontimestamp,enabled,operatingSystem,operatingSystemVersion,operatingSystemServicePack,distinguishedName,description | `
+        $Computers = Get-ADComputer -Filter {OperatingSystem -Like "*Windows*"} -Server $i -Properties lastlogontimestamp,enabled,whenCreated,operatingSystem,operatingSystemVersion,operatingSystemServicePack,distinguishedName,description | `
         select-object Name,@{Name="lastLogonTimestamp"; Expression={[DateTime]::FromFileTime($_.lastLogonTimestamp)}},Enabled,operatingSystem,operatingSystemVersion,operatingSystemServicePack,distinguishedName,Description,@{Name="Domain"; Expression={$i}}
         $AllComputers += $Computers
     }
